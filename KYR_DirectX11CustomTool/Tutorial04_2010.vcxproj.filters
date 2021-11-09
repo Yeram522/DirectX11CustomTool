@@ -32,6 +32,8 @@
       <Filter>Resource Files</Filter>
     </ResourceCompile>
     <ClInclude Include="shape.h" />
+    <ClInclude Include="Square.h" />
+    <ClInclude Include="Circle.h" />
   </ItemGroup>
   <ItemGroup>
   </ItemGroup>

@@ -9,3 +9,4 @@ D:\google_drive\1_My_Data\2_Lectures\Hongik_Class\컴퓨터그래픽스\DX11소�
 E:\1_2021\2021-Univ-Fall-Term\02.컴퓨터-그래픽스\01.실습\directx_tutorial\7_3D_Transformation\Debug\Tutorial04.exe
 E:\1_2021\2021-Univ-Fall-Term\02.컴퓨터-그래픽스\01.실습\directx_tutorial\7-2_3D_Transformation_P\Debug\Tutorial04.exe
 E:\1_2021\DirectX11CustomTool\7-2_3D_Transformation_P\Debug\Tutorial04.exe
+E:\1_2021\DirectX11CustomTool\KYR_DirectX11CustomTool\Debug\Tutorial04.exe

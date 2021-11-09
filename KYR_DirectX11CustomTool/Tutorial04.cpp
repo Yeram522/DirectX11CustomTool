@@ -5,6 +5,8 @@
 #include <d3dx11.h>
 #include <d3dx10.h>
 #include "shape.h"
+#include "square.h"
+#include "Circle.h"
 
 // include the Direct3D Library file
 #pragma comment (lib, "d3d11.lib")
@@ -27,8 +29,8 @@ ID3D11Buffer* pVBuffer;                // the pointer to the vertex buffer
 ID3D11Buffer* pCBuffer;                // the pointer to the constant buffer
 
 //my testing class
-Squere* test;
-Squere* test2;
+Square* test;
+Circle* test2;
 
 // various buffer structs
 //struct VERTEX { FLOAT X, Y, Z; D3DXCOLOR Color; };
@@ -198,15 +200,15 @@ void RenderFrame(void)
     static float Time = 0.0f; Time += 0.0001f;
 
  
-    test->rotation(ANGLE::X, Time);
-    test2->rotation(ANGLE::X, Time);
+      test->rotation(ANGLE::X, Time);
+      test2->rotation(ANGLE::Y, Time);
 
-    test->scaling(1.0f, 1.0f, 1.0f);
+      //test->scaling(1.0f, 1.0f, 1.0f);
     
 
    
-    test->translate(Time, 0.0f, 0.0f);
-    test2->translate(Time, 0.0f, 0.0f);
+     //test->translate(Time, 0.0f, 0.0f);
+    //test2->translate(0.0f, 0.0f, 0.0f);
 
     // create a view matrix
     D3DXMatrixLookAtLH(&matView,
@@ -223,9 +225,9 @@ void RenderFrame(void)
 
 // create the final transform
 
-    devcon->UpdateSubresource(pCBuffer, 0, 0, test->update(test->getMatTrans(), test->getMatScale(),test->metGatRotate(), matView,matProjection), 0, 0);
-    devcon->UpdateSubresource(pCBuffer, 0, 0, test2->update(test2->getMatTrans(), test2->metGatRotate(), matView,matProjection), 0, 0);
-
+    devcon->UpdateSubresource(pCBuffer, 0, 0, test->update(test->metGatRotate(), matView,matProjection), 0, 0);
+    devcon->UpdateSubresource(pCBuffer, 0, 0, test2->update(test2->metGatRotate(), matView,matProjection), 0, 0);
+    
     // clear the back buffer to a deep blue
     devcon->ClearRenderTargetView(backbuffer, D3DXCOLOR(0.960f, 0.964f, 0.980f, 1.0f));
 
@@ -258,8 +260,8 @@ void CleanD3D(void)
 // this is the function that creates the shape to render
 void InitGraphics()
 {   
-    test = new Squere({ 0,0 }, { 2,2 }, devcon, dev);
-    test2 = new Squere({ -2,0 }, { 1,1 }, devcon, dev);
+    test = new Square({ 0,0 }, { 2,2 }, devcon, dev);
+    test2 = new Circle({ 3,0 }, 1, devcon, dev);
 }
 
 

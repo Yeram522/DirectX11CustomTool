@@ -380,8 +380,10 @@
     <None Include="Tutorial04.fx" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Circle.h" />
     <CLInclude Include="resource.h" />
     <ClInclude Include="shape.h" />
+    <ClInclude Include="Square.h" />
     <ResourceCompile Include="Tutorial04.rc" />
   </ItemGroup>
   <ItemGroup>

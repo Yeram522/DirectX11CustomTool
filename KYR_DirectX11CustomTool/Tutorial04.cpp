@@ -224,7 +224,7 @@ void RenderFrame(void)
 
     // create the final transform=======================================================
 
-    devcon->UpdateSubresource(pCBuffer, 0, 0, Sun->update(Sun->metGatRotate(), matView,matProjection), 0, 0);
+    devcon->UpdateSubresource(pCBuffer, 0, 0, Sun->update(Sun->getMatRotate(), matView,matProjection), 0, 0);
  
     //==================================================================================
 

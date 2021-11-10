@@ -40,7 +40,7 @@ public:
 	ID3D11Buffer* getBuffer(int n) { return pVBuffer; }
 	D3DXMATRIX getMatTrans() { return matTrans; }
 	D3DXMATRIX getMatScale() { return matScale; }
-	D3DXMATRIX metGatRotate() { return matRotate; }
+	D3DXMATRIX getMatRotate() { return matRotate; }
 	D3DXCOLOR* getColors() { return vertexsColor; }
 
 	void translate(FLOAT sx, FLOAT sy, FLOAT sz)

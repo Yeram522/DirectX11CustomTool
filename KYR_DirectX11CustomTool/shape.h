@@ -20,22 +20,28 @@ class Shape
 private:
 	Position pos;
 	D3DXMATRIX matTrans, matScale, matRotate, matFinal;
-
+	D3DXCOLOR vertexsColor[3] = 
+	{ D3DXCOLOR(0.0f, 0.0f, 1.0f, 1.0f),D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f) ,D3DXCOLOR(0.0f, 1.0f, 0.0f, 1.0f) };//삼각형을 이루는 정점 3개.
 protected:
 	ID3D11Buffer* pVBuffer;
 	ID3D11Device* dev;                     // the pointer to our Direct3D device interface
 	ID3D11DeviceContext* devcon;
 	bool isFilled;
 public:
-	Shape(Position pos, ID3D11DeviceContext* devcon, ID3D11Device* dev, bool isFilled = true)
+	Shape(Position pos, ID3D11DeviceContext* devcon, ID3D11Device* dev, D3DXCOLOR c1 , D3DXCOLOR c2, D3DXCOLOR c3, bool isFilled = true)
 		: pos(pos),  devcon(devcon),dev(dev),isFilled(isFilled)
-	{ }
+	{ 
+		vertexsColor[0] = c1;
+		vertexsColor[1] = c2;
+		vertexsColor[2] = c3;	
+	}
 
 	ID3D11Buffer* const* getBuffer() { return &pVBuffer; }
 	ID3D11Buffer* getBuffer(int n) { return pVBuffer; }
 	D3DXMATRIX getMatTrans() { return matTrans; }
 	D3DXMATRIX getMatScale() { return matScale; }
 	D3DXMATRIX metGatRotate() { return matRotate; }
+	D3DXCOLOR* getColors() { return vertexsColor; }
 
 	void translate(FLOAT sx, FLOAT sy, FLOAT sz)
 	{
@@ -84,5 +90,17 @@ public:
 		return &matFinal;
 	}
 
-	virtual void render() = 0 { }
+	virtual void render() 
+	{
+		// select which vertex buffer to display
+		UINT stride = sizeof(VERTEX);
+		UINT offset = 0;
+		devcon->IASetVertexBuffers(0, 1, &pVBuffer, &stride, &offset);
+
+		// select which primtive type we are using
+		if (isFilled == true)devcon->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+		else
+			devcon->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_LINESTRIP);
+
+	}
 };

@@ -55,9 +55,9 @@ C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\d3d10.h(608,1):
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\shared\winerror.h(56841): message : 'D3D10_ERROR_TOO_MANY_UNIQUE_STATE_OBJECTS'의 이전 정의를 참조하십시오.
 C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include\d3d10.h(609,1): warning C4005: 'D3D10_ERROR_FILE_NOT_FOUND': 매크로 재정의
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\shared\winerror.h(56850): message : 'D3D10_ERROR_FILE_NOT_FOUND'의 이전 정의를 참조하십시오.
-E:\1_2021\DirectX11CustomTool\KYR_DirectX11CustomTool\shape.h(35,30): warning C4100: 'n': 참조되지 않은 정식 매개 변수입니다.
-E:\1_2021\DirectX11CustomTool\KYR_DirectX11CustomTool\Tutorial04.cpp(53,11): warning C4100: 'lpCmdLine': 참조되지 않은 정식 매개 변수입니다.
-E:\1_2021\DirectX11CustomTool\KYR_DirectX11CustomTool\Tutorial04.cpp(52,15): warning C4100: 'hPrevInstance': 참조되지 않은 정식 매개 변수입니다.
+E:\1_2021\DirectX11CustomTool\KYR_DirectX11CustomTool\shape.h(40,30): warning C4100: 'n': 참조되지 않은 정식 매개 변수입니다.
+E:\1_2021\DirectX11CustomTool\KYR_DirectX11CustomTool\Tutorial04.cpp(52,11): warning C4100: 'lpCmdLine': 참조되지 않은 정식 매개 변수입니다.
+E:\1_2021\DirectX11CustomTool\KYR_DirectX11CustomTool\Tutorial04.cpp(51,15): warning C4100: 'hPrevInstance': 참조되지 않은 정식 매개 변수입니다.
 E:\1_2021\DirectX11CustomTool\KYR_DirectX11CustomTool\Tutorial04.cpp(217): warning C4238: 비표준 확장이 사용됨: 클래스 rvalue를 lvalue로 사용했습니다.
 E:\1_2021\DirectX11CustomTool\KYR_DirectX11CustomTool\Tutorial04.cpp(216,21): warning C4238: 비표준 확장이 사용됨: 클래스 rvalue를 lvalue로 사용했습니다.
 E:\1_2021\DirectX11CustomTool\KYR_DirectX11CustomTool\Tutorial04.cpp(215,21): warning C4238: 비표준 확장이 사용됨: 클래스 rvalue를 lvalue로 사용했습니다.

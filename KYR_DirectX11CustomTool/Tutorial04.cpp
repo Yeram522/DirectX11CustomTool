@@ -25,12 +25,11 @@ ID3D11RenderTargetView* backbuffer;    // the pointer to our back buffer
 ID3D11InputLayout* pLayout;            // the pointer to the input layout
 ID3D11VertexShader* pVS;               // the pointer to the vertex shader
 ID3D11PixelShader* pPS;                // the pointer to the pixel shader
-ID3D11Buffer* pVBuffer;                // the pointer to the vertex buffer
+//ID3D11Buffer* pVBuffer;                // the pointer to the vertex buffer
 ID3D11Buffer* pCBuffer;                // the pointer to the constant buffer
 
 //my testing class
-Square* test;
-Circle* test2;
+Circle* test;
 
 // various buffer structs
 //struct VERTEX { FLOAT X, Y, Z; D3DXCOLOR Color; };
@@ -200,15 +199,16 @@ void RenderFrame(void)
     static float Time = 0.0f; Time += 0.0001f;
 
  
-      test->rotation(ANGLE::X, Time);
-      test2->rotation(ANGLE::Y, Time);
+     // test->rotation(ANGLE::Y, 91.0f);
+      //test->rotation(ANGLE::Y, Time);
+      test->rotation(ANGLE::Z,Time);
+
 
       //test->scaling(1.0f, 1.0f, 1.0f);
     
-
+      test->translate(2.0f, 0.0f, 0.0f);
    
-     //test->translate(Time, 0.0f, 0.0f);
-    //test2->translate(0.0f, 0.0f, 0.0f);
+     
 
     // create a view matrix
     D3DXMatrixLookAtLH(&matView,
@@ -225,14 +225,16 @@ void RenderFrame(void)
 
 // create the final transform
 
-    devcon->UpdateSubresource(pCBuffer, 0, 0, test->update(test->metGatRotate(), matView,matProjection), 0, 0);
-    devcon->UpdateSubresource(pCBuffer, 0, 0, test2->update(test2->metGatRotate(), matView,matProjection), 0, 0);
-    
+    devcon->UpdateSubresource(pCBuffer, 0, 0, test->update(test->getMatTrans(), test->metGatRotate(), matView,matProjection), 0, 0);
+ 
     // clear the back buffer to a deep blue
     devcon->ClearRenderTargetView(backbuffer, D3DXCOLOR(0.960f, 0.964f, 0.980f, 1.0f));
 
+
     test->render();
-    test2->render();
+    
+    
+    
 
     // switch the back buffer and the front buffer
     swapchain->Present(0, 0);
@@ -248,7 +250,7 @@ void CleanD3D(void)
     pLayout->Release();
     pVS->Release();
     pPS->Release();
-    pVBuffer->Release();
+   //pVBuffer->Release();
     pCBuffer->Release();
     swapchain->Release();
     backbuffer->Release();
@@ -260,8 +262,8 @@ void CleanD3D(void)
 // this is the function that creates the shape to render
 void InitGraphics()
 {   
-    test = new Square({ 0,0 }, { 2,2 }, devcon, dev);
-    test2 = new Circle({ 3,0 }, 1, devcon, dev);
+    test = new Circle({ 0,0 }, 1, devcon, dev,
+        D3DXCOLOR(0.839f, 0.635f, 0.909f, 1.0f), D3DXCOLOR(0.925f, 0.847f, 0.952f, 1.0f), D3DXCOLOR(0.898f, 0.847f, 0.913f, 1.0f));
 }
 
 

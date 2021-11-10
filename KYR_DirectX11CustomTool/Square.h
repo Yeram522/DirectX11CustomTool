@@ -9,18 +9,18 @@ private:
 	VERTEX Vertices[7];
 
 public:
-	Square(Position pos, Dimension dim, ID3D11DeviceContext* devcon, ID3D11Device* dev, bool isFilled = true)
-		: Shape(pos, devcon, dev, isFilled), dim(dim)
+	Square(Position pos, Dimension dim, ID3D11DeviceContext* devcon, ID3D11Device* dev, D3DXCOLOR c1, D3DXCOLOR c2, D3DXCOLOR c3, bool isFilled = true)
+		: Shape(pos, devcon, dev, c1, c2, c3, isFilled), dim(dim)
 	{
 		VERTEX OurVertices[] =
 		{
-			{pos.x - (float)dim.x / 2,pos.y + (float)dim.y / 2, 0.0f, D3DXCOLOR(0.0f, 0.0f, 1.0f, 1.0f)},
-			{pos.x + (float)dim.x / 2, pos.y + (float)dim.y / 2, 0.0f, D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f)},
-			{pos.x - (float)dim.x / 2, pos.y - (float)dim.y / 2, 0.0f, D3DXCOLOR(0.0f, 0.0f, 1.0f, 1.0f)},
-			{pos.x + (float)dim.x / 2, pos.y + (float)dim.y / 2, 0.0f, D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f)},
-			{pos.x + (float)dim.x / 2, pos.y - (float)dim.y / 2, 0.0f, D3DXCOLOR(0.0f, 1.0f, 0.0f, 1.0f)},
-			{pos.x - (float)dim.x / 2, pos.y - (float)dim.y / 2, 0.0f, D3DXCOLOR(0.0f, 0.0f, 1.0f, 1.0f)},
-			{pos.x - (float)dim.x / 2,pos.y + (float)dim.y / 2, 0.0f, D3DXCOLOR(0.0f, 0.0f, 1.0f, 1.0f)}
+			{pos.x - (float)dim.x / 2,pos.y + (float)dim.y / 2, 0.0f, Shape::getColors()[0]},
+			{pos.x + (float)dim.x / 2, pos.y + (float)dim.y / 2, 0.0f, Shape::getColors()[1]},
+			{pos.x - (float)dim.x / 2, pos.y - (float)dim.y / 2, 0.0f, Shape::getColors()[0]},
+			{pos.x + (float)dim.x / 2, pos.y + (float)dim.y / 2, 0.0f, Shape::getColors()[1]},
+			{pos.x + (float)dim.x / 2, pos.y - (float)dim.y / 2, 0.0f, Shape::getColors()[2]},
+			{pos.x - (float)dim.x / 2, pos.y - (float)dim.y / 2, 0.0f,  Shape::getColors()[0]},
+			{pos.x - (float)dim.x / 2,pos.y + (float)dim.y / 2, 0.0f,  Shape::getColors()[0]}
 		};
 
 		copy(OurVertices, OurVertices + 7, Vertices);
@@ -46,16 +46,7 @@ public:
 
 	void render() override
 	{
-		// select which vertex buffer to display
-		UINT stride = sizeof(VERTEX);
-		UINT offset = 0;
-		devcon->IASetVertexBuffers(0, 1, &pVBuffer, &stride, &offset);
-
-		// select which primtive type we are using
-		if (isFilled == true)devcon->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-		else
-			devcon->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_LINESTRIP);
-
+		Shape::render();
 		// draw the vertex buffer to the back buffer
 		devcon->Draw(7, 0);
 	}

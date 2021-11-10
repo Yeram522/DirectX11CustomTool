@@ -9,10 +9,9 @@ class Circle : public Shape
 private:
 	VERTEX Vertices[90];// 30= 얼마나 세밀하게 점 그릴지.
 public:
-	Circle(Position pos, float radius, ID3D11DeviceContext* devcon, ID3D11Device* dev, bool isFilled = true)
-		: Shape(pos, devcon, dev, isFilled)
+	Circle(Position pos, float radius, ID3D11DeviceContext* devcon, ID3D11Device* dev, D3DXCOLOR c1, D3DXCOLOR c2, D3DXCOLOR c3, bool isFilled = true)
+		: Shape(pos, devcon, dev, c1,c2,c3,isFilled)
 	{
-	
 		float deltaTheta = 2 * M_PI / 30;
 		for (int i = 0; i < 30; i++)
 		{
@@ -21,9 +20,9 @@ public:
 
 			float theta = i * deltaTheta; // Theta is the angle for that triangle
 			int index = 3 * i;
-			Vertices[index + 0] = { pos.x+0.0f, pos.y+0.0f, 0.0f, D3DXCOLOR(0.0f, 0.0f, 1.0f, 1.0f) };
-			Vertices[index + 1] = { pos.x+radius*(float)cos(theta),pos.y+radius*(float)sin(theta), 0.0f, D3DXCOLOR(0.0f, 0.0f, 1.0f, 1.0f) };
-			Vertices[index + 2] = { pos.x+radius*(float)cos(theta + deltaTheta), pos.y + radius*(float)sin(theta + deltaTheta), 0.0f, D3DXCOLOR(0.0f, 0.0f, 1.0f, 1.0f) };
+			Vertices[index + 0] = { pos.x+0.0f, pos.y+0.0f, 0.0f, Shape::getColors()[0] };
+			Vertices[index + 1] = { pos.x+radius*(float)cos(theta),pos.y-radius*(float)sin(theta), 0.0f,  Shape::getColors()[1] };
+			Vertices[index + 2] = { pos.x+radius*(float)cos(theta + deltaTheta), pos.y - radius*(float)sin(theta + deltaTheta), 0.0f,  Shape::getColors()[2] };
 		
 		}
 
@@ -46,17 +45,10 @@ public:
 		devcon->Unmap(pVBuffer, NULL);                                      // unmap the buffer
 	}
 
+
 	void render() override
 	{
-		// select which vertex buffer to display
-		UINT stride = sizeof(VERTEX);
-		UINT offset = 0;
-		devcon->IASetVertexBuffers(0, 1, &pVBuffer, &stride, &offset);
-
-		// select which primtive type we are using
-		if (isFilled == true)devcon->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-		else
-			devcon->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_LINESTRIP);
+		Shape::render();
 
 		// draw the vertex buffer to the back buffer
 		devcon->Draw(90, 0);

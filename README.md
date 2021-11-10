@@ -105,3 +105,21 @@ test->translate(2.0f, 0.0f, 0.0f);
 test->scaling(1.0f, 1.0f, 1.0f);
 ```
 
+
+
+⭐ 모든 행렬 계산 및 카메라 등등 업데이트
+
+```c++
+devcon->UpdateSubresource(pCBuffer, 0, 0, test->update(test->metGatRotate(), matView,matProjection), 0, 0);
+```
+
+
+
+⭐ render
+
+```c++
+ test->render();
+```
+
+
+

@@ -28,7 +28,7 @@ ID3D11PixelShader* pPS;                // the pointer to the pixel shader
 ID3D11Buffer* pCBuffer;                // the pointer to the constant buffer
 
 //my testing class
-Circle* test;
+Circle* Sun;
 
 // various buffer structs
 struct PERFRAME { D3DXCOLOR Color; FLOAT X, Y, Z; };// constant buffer ³Ñ±æ¶§ ÀÚ·á±¸Á¶. shaderÀÌ¶û Â¦²á
@@ -199,13 +199,13 @@ void RenderFrame(void)
  
      // test->rotation(ANGLE::Y, 91.0f);
       //test->rotation(ANGLE::Y, Time);
-      test->rotation(ANGLE::Z,Time);
+     Sun->rotation(ANGLE::Z,Time);
 
 
       //test->scaling(1.0f, 1.0f, 1.0f);
     
-      test->translate(2.0f, 0.0f, 0.0f);
-   
+    // Sun->translate(2.0f, 0.0f, 0.0f);
+    
      
 
     // create a view matrix
@@ -221,18 +221,23 @@ void RenderFrame(void)
         1.0f,                                       // near view-plane  
         500.0f);
 
-// create the final transform
 
-    devcon->UpdateSubresource(pCBuffer, 0, 0, test->update(test->getMatTrans(), test->metGatRotate(), matView,matProjection), 0, 0);
+    // create the final transform=======================================================
+
+    devcon->UpdateSubresource(pCBuffer, 0, 0, Sun->update(Sun->metGatRotate(), matView,matProjection), 0, 0);
  
-    // clear the back buffer to a deep blue
+    //==================================================================================
+
+    // clear the back buffer to a deep blue=============================================
     devcon->ClearRenderTargetView(backbuffer, D3DXCOLOR(0.960f, 0.964f, 0.980f, 1.0f));
+    //==================================================================================
 
 
-    test->render();
+    //Shape render=====================================================================
+    Sun->render();
     
     
-    
+    //==================================================================================
 
     // switch the back buffer and the front buffer
     swapchain->Present(0, 0);
@@ -260,7 +265,7 @@ void CleanD3D(void)
 // this is the function that creates the shape to render
 void InitGraphics()
 {   
-    test = new Circle({ 0,0 }, 1, devcon, dev,
+    Sun = new Circle({ 0,0 }, 1, devcon, dev,
         D3DXCOLOR(0.839f, 0.635f, 0.909f, 1.0f), D3DXCOLOR(0.925f, 0.847f, 0.952f, 1.0f), D3DXCOLOR(0.898f, 0.847f, 0.913f, 1.0f),true);
 }
 

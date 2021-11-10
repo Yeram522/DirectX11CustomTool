@@ -4,8 +4,7 @@
 #include <d3d11.h>
 #include <d3dx11.h>
 #include <d3dx10.h>
-#include "shape.h"
-#include "square.h"
+#include "Square.h"
 #include "Circle.h"
 
 // include the Direct3D Library file
@@ -32,8 +31,7 @@ ID3D11Buffer* pCBuffer;                // the pointer to the constant buffer
 Circle* test;
 
 // various buffer structs
-//struct VERTEX { FLOAT X, Y, Z; D3DXCOLOR Color; };
-//struct PERFRAME { D3DXCOLOR Color; FLOAT X, Y, Z; };// constant buffer ³Ñ±æ¶§ ÀÚ·á±¸Á¶. shaderÀÌ¶û Â¦²á
+struct PERFRAME { D3DXCOLOR Color; FLOAT X, Y, Z; };// constant buffer ³Ñ±æ¶§ ÀÚ·á±¸Á¶. shaderÀÌ¶û Â¦²á
 
 // function prototypes
 void InitD3D(HWND hWnd);    // sets up and initializes Direct3D
@@ -263,7 +261,7 @@ void CleanD3D(void)
 void InitGraphics()
 {   
     test = new Circle({ 0,0 }, 1, devcon, dev,
-        D3DXCOLOR(0.839f, 0.635f, 0.909f, 1.0f), D3DXCOLOR(0.925f, 0.847f, 0.952f, 1.0f), D3DXCOLOR(0.898f, 0.847f, 0.913f, 1.0f));
+        D3DXCOLOR(0.839f, 0.635f, 0.909f, 1.0f), D3DXCOLOR(0.925f, 0.847f, 0.952f, 1.0f), D3DXCOLOR(0.898f, 0.847f, 0.913f, 1.0f),true);
 }
 
 

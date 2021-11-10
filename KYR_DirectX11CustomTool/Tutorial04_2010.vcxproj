@@ -382,7 +382,7 @@
   <ItemGroup>
     <ClInclude Include="Circle.h" />
     <CLInclude Include="resource.h" />
-    <ClInclude Include="shape.h" />
+    <ClInclude Include="Shape.h" />
     <ClInclude Include="Square.h" />
     <ResourceCompile Include="Tutorial04.rc" />
   </ItemGroup>

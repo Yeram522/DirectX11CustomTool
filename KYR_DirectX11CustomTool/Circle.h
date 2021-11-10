@@ -1,5 +1,5 @@
 #pragma once
-#include "shape.h"
+#include "Shape.h"
 #include <math.h>
 
 #define M_PI           3.14159265358979323846  /* pi */
@@ -7,7 +7,7 @@
 class Circle : public Shape
 {
 private:
-	VERTEX Vertices[90];// 30= 얼마나 세밀하게 점 그릴지.
+	VERTEX Vertices[90];// 30(얼마나 세밀하게 점 그릴지.)*3(삼각형꼭지점개수)= 90 
 public:
 	Circle(Position pos, float radius, ID3D11DeviceContext* devcon, ID3D11Device* dev, D3DXCOLOR c1, D3DXCOLOR c2, D3DXCOLOR c3, bool isFilled = true)
 		: Shape(pos, devcon, dev, c1,c2,c3,isFilled)
@@ -15,9 +15,6 @@ public:
 		float deltaTheta = 2 * M_PI / 30;
 		for (int i = 0; i < 30; i++)
 		{
-			/*int theta = i * deltaTheta;
-			Vertices[i] = { pos.x + radius*(float)cos(theta), pos.y + radius*(float)sin(theta), 0.0f, D3DXCOLOR(0.0f, 0.0f, 1.0f, 1.0f) };*/
-
 			float theta = i * deltaTheta; // Theta is the angle for that triangle
 			int index = 3 * i;
 			Vertices[index + 0] = { pos.x+0.0f, pos.y+0.0f, 0.0f, Shape::getColors()[0] };

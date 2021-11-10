@@ -31,7 +31,7 @@
     <ResourceCompile Include="Tutorial04.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
-    <ClInclude Include="shape.h" />
+    <ClInclude Include="Shape.h" />
     <ClInclude Include="Square.h" />
     <ClInclude Include="Circle.h" />
   </ItemGroup>
